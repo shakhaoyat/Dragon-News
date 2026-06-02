@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dragon News (Next.js)
+
+Dragon News is a modern news portal built with Next.js App Router. It includes category-based news browsing, dynamic news detail pages, and shared UI sections like breaking headlines, navbar, and sidebars.
+
+## Features
+
+- Category-based news listing
+- Dynamic news details route using article ID
+- Dynamic page metadata generation for news detail pages
+- Reusable shared components (header, navbar, breaking news)
+- Responsive UI with Tailwind CSS + DaisyUI
+- Server-side data fetching from the Programming Hero News API
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4
+- DaisyUI 5
+- react-icons
+- react-fast-marquee
+- date-fns
+
+## Project Structure
+
+```text
+src/
+	app/
+		(auth)/
+			login/
+			register/
+		(main)/
+			page.jsx
+			about-us/
+			career/
+			category/[id]/
+			news/[id]/
+		layout.js
+		loading.jsx
+		not-found.jsx
+	components/
+		homepage/news/
+		shared/
+	lib/
+		data.js
+```
+
+## Data Source
+
+This project uses the Programming Hero News API:
+
+- `https://openapi.programming-hero.com/api/news/categories`
+- `https://openapi.programming-hero.com/api/news/category/:id`
+- `https://openapi.programming-hero.com/api/news/:news_id`
+
+Data fetching helpers are located in `src/lib/data.js`.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.18+ (recommended: latest LTS)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start the development server
+- `npm run build` - Build the app for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint
 
-## Learn More
+## Dynamic Metadata
 
-To learn more about Next.js, take a look at the following resources:
+News detail pages use `generateMetadata` in `src/app/(main)/news/[id]/page.jsx` to set document title and description dynamically based on fetched article data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Image Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Remote images are enabled through `next.config.mjs` using `images.remotePatterns`.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can deploy this app on any platform that supports Next.js, such as:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Vercel
+- Netlify
+- Render
+
+For Vercel:
+
+1. Push this repository to GitHub.
+2. Import the project into Vercel.
+3. Deploy with default Next.js settings.
+
+## Author
+
+Built as a Dragon News learning project using Next.js App Router.
