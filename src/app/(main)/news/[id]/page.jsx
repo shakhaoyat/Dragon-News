@@ -1,20 +1,31 @@
+import { getNewsDetailsById } from "@/lib/data";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { BsArrowRight } from "react-icons/bs";
+import { CiBookmark, CiShare2 } from "react-icons/ci";
+import { FaEye } from "react-icons/fa";
+import { IoIosStar } from "react-icons/io";
 
-import { getNewsDetailsById } from '@/lib/data';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { CiBookmark, CiShare2 } from 'react-icons/ci';
-import { FaEye } from 'react-icons/fa';
-import { IoIosStar } from 'react-icons/io';
-
-const NewsDetailspage = async ({ params }) => {
+export const generateMetadata = async ({ params }) => {
       const { id } = await params;
-      console.log(id, "params")
+      console.log(id, "params");
+      const news = await getNewsDetailsById(id);
+      console.log(news, "news");
 
-      const news = await getNewsDetailsById(id)
-      console.log(news, "news")
+      return {
+            title: news.title,
+            description: news.details,
+      };
+};
+
+const NewsDetailsPage = async ({ params }) => {
+      const { id } = await params;
+      //   console.log(id, "params");
+      const news = await getNewsDetailsById(id);
+      //   console.log(news, "news");
       return (
-            <div className='container mx-auto my-8 card'>
+            <div className="container mx-auto max-w-4xl mx-auto my-8 ">
                   <div className="card bg-base-100 shadow-sm">
                         <div className="card-body">
                               {/* Author info */}
@@ -50,7 +61,7 @@ const NewsDetailspage = async ({ params }) => {
                                     />
                               </figure>
 
-                              <p className="line-clamp-3">{news.details}</p>
+                              <p className="">{news.details}</p>
 
                               <div className="flex items-center justify-between gap-2">
                                     <div className="flex items-center gap-2">
@@ -66,7 +77,9 @@ const NewsDetailspage = async ({ params }) => {
                                     </div>
 
                                     <Link href={`/category/${news.category_id}`}>
-                                          <button className="btn">See news of this caregory</button>
+                                          <button className="btn bg-purple-500 text-white">
+                                                See other news for this category <BsArrowRight />
+                                          </button>
                                     </Link>
                               </div>
                         </div>
@@ -75,4 +88,4 @@ const NewsDetailspage = async ({ params }) => {
       );
 };
 
-export default NewsDetailspage;
+export default NewsDetailsPage;
